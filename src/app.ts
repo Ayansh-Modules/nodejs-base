@@ -1,18 +1,18 @@
-import { config } from 'dotenv';
-import express, { Application } from "express";
-import { connectToMongoDB } from './configs/mongodbConfig';
-import morgan from './middleware/morgan';
-import router from './routes';
+import { config } from 'dotenv'
+import express, { Application } from 'express'
+import { connectToMongoDB } from './configs/mongodb-config'
+import morgan from './middleware/morgan'
+import router from './routes'
 
-config();
-connectToMongoDB();
+config()
+connectToMongoDB()
 
-const app: Application = express();
+const app: Application = express()
 
-app.use(morgan);
+app.use(morgan)
 
-app.use(express.json());
+app.use(express.json())
 
-router(app);
+router(app)
 
-export default app;
+export default app

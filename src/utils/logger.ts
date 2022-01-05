@@ -1,11 +1,12 @@
-import * as winston from 'winston';
-import { levels, transports } from '../configs/loggerConfig';
-import { SERVICE_NAME } from '../constants/ServiceConstants';
+import * as winston from 'winston'
+import { levels, transports } from '../configs/logger-config'
+import { SERVICE_NAME } from '../constants/service-constants'
 
 const winstonLogger: winston.Logger = winston.createLogger({
     defaultMeta: { service: SERVICE_NAME },
     levels,
-    transports
-});
+    transports,
+    exitOnError: false,
+})
 
-export default winstonLogger;
+export default winstonLogger

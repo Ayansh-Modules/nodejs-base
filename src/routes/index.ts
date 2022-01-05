@@ -1,7 +1,7 @@
-import { Router, Request, Response, Application } from 'express';
+import { Router, Application } from 'express'
 
-const router: Router = Router();
+const router: Router = Router()
 
 export default (app: Application) => {
-    app.use('/api', router);
-};
+    app.use('/api', router)
+}
