@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 const store = cls.createNamespace('correlation-id-namespace')
 
-const CORRELATION_ID_KEY = process.env.CORRELATION_ID_KEY || process.exit()
+const CORRELATION_ID_KEY = process.env.CORRELATION_ID_KEY || process.exit(1)
 
 function withId(func: () => void, id: string | undefined) {
     store.run(() => {

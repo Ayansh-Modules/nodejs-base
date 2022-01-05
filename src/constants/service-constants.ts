@@ -1,5 +1,4 @@
-const SERVICE_NAME = 'base-service'
-
-export {
-    SERVICE_NAME
+const serviceConstants = {
 }
+
+export default serviceConstants

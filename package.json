@@ -1,5 +1,5 @@
 {
-  "name": "embrays-auth",
+  "name": "embrays-base",
   "version": "0.0.1",
   "description": "Authentication module for embrays technologies",
   "main": "index.js",

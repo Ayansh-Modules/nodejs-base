@@ -1,11 +1,11 @@
-import http from "http";
-import app from "./app";
-import logger from "./utils/logger";
+import http from 'http'
+import app from './app'
+import logger from './utils/logger'
 
-const server = http.createServer(app);
+const server = http.createServer(app)
 
-const port = process.env.PORT;
+const port = process.env.PORT
 
 server.listen(port, (): void => {
-  logger.info(`Server running on port ${port}`);
-});
+  logger.info(`Server running on port ${port}`)
+})

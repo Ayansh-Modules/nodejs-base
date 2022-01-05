@@ -17,7 +17,7 @@ export function connectToMongoDB() {
 
     mongodbConnect(MONGO_URI!, options)
     .then(() => {
-        logger.info('Successfully connected to mongoDB database')
+        logger.info('Successfully connected to MongoDB')
     })
     .catch((error: Error) => {
         logger.error('MongoDB connection failed. Exiting now...')
