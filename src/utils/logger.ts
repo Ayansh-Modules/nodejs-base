@@ -1,6 +1,6 @@
 import winston from 'winston'
 import Transport from 'winston-transport'
-import Configuration from '../configs/app-configuration'
+import Configuration from '../configs/app-config'
 import Constants from '../constants'
 import correlator from '../configs/correlation-id-config'
 import validators from './validators'
@@ -19,7 +19,7 @@ const filter = (level: string): winston.Logform.Format => {
 }
 
 const addCorrelationIdFormatFunction = winston.format((info) => {
-    info.correlationId = correlator.getId() || Constants.NO_CORRELATION_ID
+    info.correlationId = correlator.getId() || Constants.CORRELATION_ID.NONE
     return info
 })
 

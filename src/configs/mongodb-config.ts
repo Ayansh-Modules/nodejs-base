@@ -1,7 +1,7 @@
 import { connect as mongodbConnect, ConnectOptions } from 'mongoose'
 import logger from '../utils/logger'
 import NodeEnvType from '../enums/node-environments-enum'
-import Configuration from './app-configuration'
+import Configuration from './app-config'
 
 export function connectToMongoDB() {
 

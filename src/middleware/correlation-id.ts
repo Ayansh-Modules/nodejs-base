@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import correlator from '../configs/correlation-id-config'
-import Configuration from '../configs/app-configuration'
+import Configuration from '../configs/app-config'
 
 const correlationIdKey = Configuration.app.CORRELATION_ID_KEY
 
