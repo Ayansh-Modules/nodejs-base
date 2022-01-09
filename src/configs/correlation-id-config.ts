@@ -1,19 +1,19 @@
 import cls from 'cls-hooked'
 import { v4 as uuidv4 } from 'uuid'
+import Constants from '../constants'
+import Configuration from './app-configuration'
 
-const store = cls.createNamespace('correlation-id-namespace')
-
-const CORRELATION_ID_KEY = process.env.CORRELATION_ID_KEY || process.exit(1)
+const store = cls.createNamespace(Constants.CORRELATION_ID_NAMESPACE)
 
 function withId(func: () => void, id: string | undefined) {
     store.run(() => {
-        store.set(CORRELATION_ID_KEY, id || uuidv4())
+        store.set(Configuration.app.CORRELATION_ID_KEY, id || uuidv4())
         func()
     })
 }
 
 function getId() {
-    return store.get(CORRELATION_ID_KEY)
+    return store.get(Configuration.app.CORRELATION_ID_KEY)
 }
 
 const correlator = {

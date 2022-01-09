@@ -1,6 +1,9 @@
-import * as winston from 'winston'
-import * as Transport from 'winston-transport'
+import winston from 'winston'
+import Transport from 'winston-transport'
+import Configuration from '../configs/app-configuration'
+import Constants from '../constants'
 import correlator from '../configs/correlation-id-config'
+import validators from './validators'
 
 /**
  * @param level string Filter function will allow logging only this specified log level
@@ -16,14 +19,17 @@ const filter = (level: string): winston.Logform.Format => {
 }
 
 const addCorrelationIdFormatFunction = winston.format((info) => {
-    info.correlationId = correlator.getId() || 'NO_CORRELATION_ID'
+    info.correlationId = correlator.getId() || Constants.NO_CORRELATION_ID
     return info
 })
 
 const commonFormatters = [
     addCorrelationIdFormatFunction(),
     winston.format.timestamp(),
-    winston.format.printf(({service, level, correlationId, timestamp, message, ...moreInfo}) => {
+    winston.format.printf(({ service, level, correlationId, timestamp, message, ...moreInfo }) => {
+        if (validators.isEmptyObject(moreInfo)) {
+            return `[${service}] :: ${level} :: ${correlationId} :: ${timestamp} :: ${JSON.stringify(message)}`
+        }
         return `[${service}] :: ${level} :: ${correlationId} :: ${timestamp} :: ${JSON.stringify(message)} :: ${JSON.stringify(moreInfo)}`
     })
 ]
@@ -43,7 +49,7 @@ const transports: Transport[] = [
         filename: 'logs/error.log',
         level: 'error',
         format: winston.format.combine(
-            winston.format.errors({stack: true}),
+            winston.format.errors({ stack: true }),
             ...commonFormatters,
         )
     }),
@@ -85,11 +91,11 @@ const transports: Transport[] = [
     }),
 ]
 
-const winstonLogger: winston.Logger = winston.createLogger({
-    defaultMeta: { service: process.env.SERVICE_NAME || process.exit(1) },
+const logger: winston.Logger = winston.createLogger({
+    defaultMeta: { service: Configuration.app.SERVICE_NAME },
     levels,
     transports,
     exitOnError: false,
 })
 
-export default winstonLogger
+export default logger

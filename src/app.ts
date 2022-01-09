@@ -1,5 +1,3 @@
-import { config } from 'dotenv'
-config()
 import express, { Application } from 'express'
 import { connectToMongoDB } from './configs/mongodb-config'
 connectToMongoDB()

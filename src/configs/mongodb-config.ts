@@ -1,28 +1,24 @@
 import { connect as mongodbConnect, ConnectOptions } from 'mongoose'
 import logger from '../utils/logger'
-import nodeEnv from '../constants/node-env-constants'
+import NodeEnvType from '../enums/node-environments-enum'
+import Configuration from './app-configuration'
 
 export function connectToMongoDB() {
 
-    const { DB_NAME, MONGO_URI, NODE_ENV } = process.env
-
     const options: ConnectOptions = {
-        autoIndex: NODE_ENV === nodeEnv.PRODUCTION,
-        autoCreate: NODE_ENV === nodeEnv.PRODUCTION,
+        autoIndex: Configuration.app.NODE_ENV === NodeEnvType.PRODUCTION,
+        autoCreate: Configuration.app.NODE_ENV === NodeEnvType.PRODUCTION,
+        dbName: Configuration.mongoDb.DB_NAME
     }
 
-    if (DB_NAME) {
-        options.dbName = DB_NAME
-    }
-
-    mongodbConnect(MONGO_URI!, options)
-    .then(() => {
-        logger.info('Successfully connected to MongoDB')
-    })
-    .catch((error: Error) => {
-        logger.error('MongoDB connection failed. Exiting now...')
-        logger.error(error)
-        process.exit(1)
-    })
+    mongodbConnect(Configuration.mongoDb.URI, options)
+        .then(() => {
+            logger.info('Successfully connected to MongoDB')
+        })
+        .catch((error: Error) => {
+            logger.error('MongoDB connection failed. Exiting now...')
+            logger.error(error)
+            process.exit(1)
+        })
 
 }

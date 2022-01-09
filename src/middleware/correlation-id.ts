@@ -1,7 +1,8 @@
-import correlator from '../configs/correlation-id-config'
 import { NextFunction, Request, Response } from 'express'
+import correlator from '../configs/correlation-id-config'
+import Configuration from '../configs/app-configuration'
 
-const correlationIdKey = process.env.CORRELATION_ID_KEY || process.exit(1)
+const correlationIdKey = Configuration.app.CORRELATION_ID_KEY
 
 function correlationIdMiddleware(req: Request, res: Response, next: NextFunction) {
     correlator.bindEmitter(req)
