@@ -24,6 +24,11 @@ const app = {
     PORT: getEnvironmentVariable(EnvironmentVariableName.PORT, true),
     CORRELATION_ID_KEY: getEnvironmentVariable(EnvironmentVariableName.CORRELATION_ID_KEY, true),
     SERVICE_NAME: getEnvironmentVariable(EnvironmentVariableName.SERVICE_NAME, true),
+    logging: {
+        DIRECTORY: getEnvironmentVariable(EnvironmentVariableName.LOG_DIRECTORY, true),
+        RENTENTION: getEnvironmentVariable(EnvironmentVariableName.LOG_RETENTION, true),
+        MAX_FILE_SIZE: getEnvironmentVariable(EnvironmentVariableName.LOG_MAX_FILE_SIZE, true)
+    }
 }
 
 const Configuration = {

@@ -15,12 +15,13 @@
 
 ## Points to remember
 
-1. Always use logger util (exceptional cases aside)
-2. Always add strings (or constant data in general) to a constants file and import data from there
-3. Add configurations to [environment variable files](#environment-files) and then to [app-config.ts](src/configs/app-config.ts) & [env-variables-enum](src/enums/env-variables-enum.ts) appropriately
-4. Always define errors for specific scenarios by extending [BaseException](src/errors/base-error.ts) or another (error) class which extends BaseException
-5. Pass errors to the centralised error handling mechanism using next(error) passing ALWAYS
+1. *Always* use logger util (exceptional cases aside) to log things
+2. *Always* add strings (or constant data in general) to a constants file and import data from there
+3. *Always* add configurations to [environment variable files](#environment-files) and then to following 2 files [env-variables-enum](src/enums/env-variables-enum.ts), and [app-config.ts](src/configs/app-config.ts) appropriately
+4. *Always* define errors for specific scenarios by extending [BaseException](src/errors/base-error.ts) or another (error) class which extends BaseException
+5. *Always* pass errors to the centralised error handling mechanism using next(error)
 6. For any non-scenario specific feature/functionality, add utilities for the same
+7. *Always* use the utility [got](src/utils/got.ts) tor any external API/Unix/RPC call. If there are more customisations you want to do then add them as builder options inside this utility
 
 ## Naming conventions to use
 
@@ -37,11 +38,18 @@
 1. `.env`
    1. NODE_ENV
 2. `.env.`**`<NODE_ENV value>`** (Example: .env.development)
-   1. MONGODB_URI
-   2. MONGODB_DB_NAME
-   3. PORT
-   4. CORRELATION_ID_KEY
-   5. SERVICE_NAME
+   
+   Example File
+   ```
+   MONGODB_URI=mongodb://localhost:27017
+   MONGODB_DB_NAME=db-name
+   PORT=3001
+   CORRELATION_ID_KEY=x-correlation-id
+   SERVICE_NAME=base-service
+   LOG_DIRECTORY=logs
+   LOG_RENTETION=30d
+   LOG_MAX_FILE_SIZE=20m
+   ```
 
 ## Resources to use
 1. https://github.com/sindresorhus/got/blob/main/documentation/tips.md
