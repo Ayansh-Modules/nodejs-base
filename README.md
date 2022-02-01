@@ -5,12 +5,13 @@
 1. Add logger transports
    1. AWS Cloudwatch
 2. Convert to node library & host it privately (use Verdaccio)
-3. All external API calls add correlation ID
-4. Add notifications for errors
+3. Add notifications for errors
    1. Slack
    2. Email
    3. Sentry
    4. etc etc
+4. Sign each and every API key from and to different services
+5. Rate limiting
 
 ## Points to remember
 
@@ -41,3 +42,6 @@
    3. PORT
    4. CORRELATION_ID_KEY
    5. SERVICE_NAME
+
+## Resources to use
+1. https://github.com/sindresorhus/got/blob/main/documentation/tips.md
