@@ -5,7 +5,13 @@
 1. Add logger transports
    1. AWS Cloudwatch
 2. Convert to node library & host it privately (use Verdaccio)
-3. All external API calls add correlation ID
+3. Add notifications for errors
+   1. Slack
+   2. Email
+   3. Sentry
+   4. etc etc
+4. Sign each and every API key from and to different services
+5. Rate limiting
 
 ## Points to remember
 
@@ -13,7 +19,8 @@
 2. Always add strings (or constant data in general) to a constants file and import data from there
 3. Add configurations to [environment variable files](#environment-files) and then to [app-config.ts](src/configs/app-config.ts) & [env-variables-enum](src/enums/env-variables-enum.ts) appropriately
 4. Always define errors for specific scenarios by extending [BaseException](src/errors/base-error.ts) or another (error) class which extends BaseException
-5. For any non-scenario specific feature/functionality, add utilities for the same
+5. Pass errors to the centralised error handling mechanism using next(error) passing ALWAYS
+6. For any non-scenario specific feature/functionality, add utilities for the same
 
 ## Naming conventions to use
 
@@ -35,3 +42,6 @@
    3. PORT
    4. CORRELATION_ID_KEY
    5. SERVICE_NAME
+
+## Resources to use
+1. https://github.com/sindresorhus/got/blob/main/documentation/tips.md
