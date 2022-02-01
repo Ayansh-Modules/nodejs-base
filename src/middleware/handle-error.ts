@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
-import BaseError from 'src/errors/base-error'
-import logger from 'src/utils/logger'
+import BaseError from '../errors/base-error'
+import logger from '../utils/logger'
 
 const logError = async (err: Error) => {
     if (err instanceof BaseError) {

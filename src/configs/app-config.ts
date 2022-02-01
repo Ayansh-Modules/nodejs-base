@@ -28,6 +28,10 @@ const app = {
         DIRECTORY: getEnvironmentVariable(EnvironmentVariableName.LOG_DIRECTORY, true),
         RENTENTION: getEnvironmentVariable(EnvironmentVariableName.LOG_RETENTION, true),
         MAX_FILE_SIZE: getEnvironmentVariable(EnvironmentVariableName.LOG_MAX_FILE_SIZE, true)
+    },
+    project: {
+        OWNER: getEnvironmentVariable(EnvironmentVariableName.PROJECT_OWNER, true),
+        NAME: getEnvironmentVariable(EnvironmentVariableName.PROJECT_NAME, true)
     }
 }
 

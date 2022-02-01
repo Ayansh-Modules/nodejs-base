@@ -1,4 +1,8 @@
 enum EnvironmentVariableName {
+    // Tags
+    PROJECT_OWNER = 'PROJECT_OWNER',
+    PROJECT_NAME = 'PROJECT_NAME',
+
     // App general
     NODE_ENV = 'NODE_ENV',
     PORT = 'PORT',
