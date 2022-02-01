@@ -1,5 +1,6 @@
 import winston from 'winston'
 import Transport from 'winston-transport'
+import 'winston-daily-rotate-file'
 import Configuration from '../configs/app-config'
 import Constants from '../constants'
 import correlator from '../configs/correlation-id-config'
@@ -43,35 +44,46 @@ const levels: winston.config.AbstractConfigSetLevels = {
     http: 5,
 }
 
+const dailyRotateFileOptions = {
+    datePattern: 'HH-DD-MM-YYYY',
+    zippedArchive: true, 
+    dirname: Configuration.app.logging.DIRECTORY,
+    maxSize: Configuration.app.logging.MAX_FILE_SIZE,
+    maxFiles: Configuration.app.logging.RENTENTION
+}
+
 const transports: Transport[] = [
     // Log error+ information to a file
-    new winston.transports.File({
-        filename: 'logs/error.log',
+    new winston.transports.DailyRotateFile({
+        filename: 'error_%DATE%.log',
         level: 'error',
         format: winston.format.combine(
             winston.format.errors({ stack: true }),
             ...commonFormatters,
-        )
+        ),
+        ...dailyRotateFileOptions
     }),
     // Log info+ information to a file
-    new winston.transports.File({
-        filename: 'logs/combined.log',
+    new winston.transports.DailyRotateFile({
+        filename: 'combined_%DATE%.log',
         level: 'info',
         format: winston.format.combine(
             ...commonFormatters
-        )
+        ),
+        ...dailyRotateFileOptions
     }),
     // Log debug+ information to a file
-    new winston.transports.File({
-        filename: 'logs/debug.log',
+    new winston.transports.DailyRotateFile({
+        filename: 'debug_%DATE%.log',
         level: 'debug',
         format: winston.format.combine(
             ...commonFormatters
-        )
+        ),
+        ...dailyRotateFileOptions
     }),
     // Log http information to a file
-    new winston.transports.File({
-        filename: 'logs/http.log',
+    new winston.transports.DailyRotateFile({
+        filename: 'http_%DATE%.log',
         level: 'http',
         format: winston.format.combine(
             filter('http'),
@@ -79,6 +91,7 @@ const transports: Transport[] = [
             winston.format.timestamp(),
             winston.format.simple()
         ),
+        ...dailyRotateFileOptions
     }),
     // Log debug+ information to the console
     new winston.transports.Console({
