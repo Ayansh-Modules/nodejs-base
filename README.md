@@ -42,13 +42,15 @@
    Example File
    ```
    MONGODB_URI=mongodb://localhost:27017
-   MONGODB_DB_NAME=db-name
+   MONGODB_DB_NAME=embrays-auth
    PORT=3001
    CORRELATION_ID_KEY=x-correlation-id
    SERVICE_NAME=base-service
    LOG_DIRECTORY=logs
-   LOG_RENTETION=30d
+   LOG_RETENTION=7d
    LOG_MAX_FILE_SIZE=20m
+   PROJECT_OWNER="Embrays Technologies"
+   PROJECT_NAME=Modules
    ```
 
 ## Resources to use
