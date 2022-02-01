@@ -5,6 +5,7 @@ import Configuration from '../configs/app-config'
 import Constants from '../constants'
 import correlator from '../configs/correlation-id-config'
 import validators from './validators'
+import NodeEnvType from 'src/enums/node-environments-enum'
 
 /**
  * @param level string Filter function will allow logging only this specified log level
@@ -84,9 +85,9 @@ const transports: Transport[] = [
         ),
         ...dailyRotateFileOptions
     }),
-    // Log debug+ information to the console
+    // Log info/debug+ information to the console
     new winston.transports.Console({
-        level: 'debug',
+        level: Configuration.app.NODE_ENV === NodeEnvType.PRODUCTION ? 'info': 'http',
         handleExceptions: true,
         format: winston.format.combine(
             winston.format.colorize(),
