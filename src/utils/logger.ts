@@ -72,15 +72,6 @@ const transports: Transport[] = [
         ),
         ...dailyRotateFileOptions
     }),
-    // Log debug+ information to a file
-    new winston.transports.DailyRotateFile({
-        filename: 'debug_%DATE%.log',
-        level: 'debug',
-        format: winston.format.combine(
-            ...commonFormatters
-        ),
-        ...dailyRotateFileOptions
-    }),
     // Log http information to a file
     new winston.transports.DailyRotateFile({
         filename: 'http_%DATE%.log',
